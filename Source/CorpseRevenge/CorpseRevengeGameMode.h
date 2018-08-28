@@ -10,9 +10,12 @@ UCLASS(minimalapi)
 class ACorpseRevengeGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
-
 public:
 	ACorpseRevengeGameMode();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
+		FVector PlayerDeathLocation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
+		FVector PlayerSpawnLocation;
 };
 
 

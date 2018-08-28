@@ -16,7 +16,6 @@ public:
 		FVector PlayerDeathLocation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
 		FVector PlayerSpawnLocation;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
+		bool isPlayerDead;
 };
-
-
-

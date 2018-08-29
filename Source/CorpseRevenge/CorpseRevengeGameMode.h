@@ -13,6 +13,8 @@ class ACorpseRevengeGameMode : public AGameModeBase
 public:
 	ACorpseRevengeGameMode();
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
+		TArray<FVector> InitialEnemyLocations;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
 		FVector PlayerDeathLocation;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GameMode")
 		FVector PlayerSpawnLocation;

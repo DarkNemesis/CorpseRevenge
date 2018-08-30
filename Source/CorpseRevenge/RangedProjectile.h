@@ -17,7 +17,7 @@ public:
 	// Sets default values for this actor's properties
 	ARangedProjectile();
 
-	ARangedProjectile(FVector i_SpawnLocation, AActor* i_Target);
+	ARangedProjectile(const FVector & i_SpawnLocation, AActor* i_Target);
 
 protected:
 	// Called when the game starts or when spawned

@@ -13,9 +13,9 @@ ARangedProjectile::ARangedProjectile()
 
 }
 
-ARangedProjectile::ARangedProjectile(FVector i_SpawnLocation, AActor* i_Target) : m_SpawnLocation(i_SpawnLocation), m_Target(i_Target)
+ARangedProjectile::ARangedProjectile(const FVector & i_SpawnLocation, AActor* i_Target) : m_SpawnLocation(i_SpawnLocation), m_Target(i_Target)
 {
-
+	SetActorLocation(i_SpawnLocation, false, nullptr, ETeleportType::TeleportPhysics);
 }
 
 // Called when the game starts or when spawned

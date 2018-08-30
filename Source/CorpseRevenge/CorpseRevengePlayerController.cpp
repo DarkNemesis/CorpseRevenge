@@ -5,6 +5,7 @@
 #include "Runtime/Engine/Classes/Components/DecalComponent.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "CorpseRevengeCharacter.h"
+#include "RangedProjectile.h"
 #include "Engine/World.h"
 
 ACorpseRevengePlayerController::ACorpseRevengePlayerController()
@@ -91,10 +92,32 @@ void ACorpseRevengePlayerController::SetNewMoveDestination(const FVector DestLoc
 	{
 		float const Distance = FVector::Dist(DestLocation, MyPawn->GetActorLocation());
 
-		// We need to issue move command only if far enough in order for walk animation to play correctly
-		if ((Distance > 120.0f))
+		TArray< TEnumAsByte< EObjectTypeQuery > > ObjectTypes;
+		ObjectTypes.Add(EObjectTypeQuery::ObjectTypeQuery3);
+		FHitResult Hit;
+		GetHitResultUnderCursorForObjects(ObjectTypes, true, Hit);
+
+		if (Hit.bBlockingHit)
 		{
+			if ((Distance > ((ACorpseRevengeCharacter*)MyPawn)->mRange))
+			{
+				UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, DestLocation);
+			}
+			else if (((ACorpseRevengeCharacter*)MyPawn)->mCanShoot)
+			{
+				auto projectile = GetWorld()->SpawnActor<ARangedProjectile>(ARangedProjectile::StaticClass(), MyPawn->GetActorLocation(), FRotator(0,0,0));
+				projectile->SetTarget(Hit.Actor.Get());
+				((ACorpseRevengeCharacter*)MyPawn)->mCanShoot = false;
+				((ACorpseRevengeCharacter*)MyPawn)->mShootTimer = 3000;
+			}
+		}
+		else if ((Distance > 120.0f)) // We need to issue move command only if far enough in order for walk animation to play correctly
+		{
+			//auto currentLocation = MyPawn->GetActorLocation();
+			//FVector direction = DestLocation - currentLocation;
+			//direction.Normalize();
 			UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, DestLocation);
+			//UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, direction * 150);
 		}
 	}
 }

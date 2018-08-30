@@ -24,6 +24,10 @@ public:
 	/** Returns CursorToWorld subobject **/
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
 
+	bool mCanShoot = true;
+	uint32 mRange = 800;
+	float mShootTimer = 0;
+
 private:
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))

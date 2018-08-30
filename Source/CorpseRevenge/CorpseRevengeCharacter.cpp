@@ -87,4 +87,9 @@ void ACorpseRevengeCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+
+	if (!mCanShoot)
+	{
+		mShootTimer -= DeltaSeconds;
+	}
 }

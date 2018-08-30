@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "CorpseRevengePlayerController.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FShootProjectile, AActor*, TargetActor);
+
 UCLASS()
 class ACorpseRevengePlayerController : public APlayerController
 {
@@ -13,6 +15,9 @@ class ACorpseRevengePlayerController : public APlayerController
 
 public:
 	ACorpseRevengePlayerController();
+
+	UPROPERTY(BlueprintAssignable)
+	FShootProjectile ShootProjectile;
 
 protected:
 	/** True if the controlled character should navigate to the mouse cursor. */
@@ -38,6 +43,7 @@ protected:
 	/** Input handlers for SetDestination action. */
 	void OnSetDestinationPressed();
 	void OnSetDestinationReleased();
+
 };
 
 

@@ -91,10 +91,24 @@ void ACorpseRevengePlayerController::SetNewMoveDestination(const FVector DestLoc
 	{
 		float const Distance = FVector::Dist(DestLocation, MyPawn->GetActorLocation());
 
-		// We need to issue move command only if far enough in order for walk animation to play correctly
-		if ((Distance > 120.0f))
+		TArray< TEnumAsByte< EObjectTypeQuery > > ObjectTypes;
+		ObjectTypes.Add(EObjectTypeQuery::ObjectTypeQuery3);
+		FHitResult Hit;
+		GetHitResultUnderCursorForObjects(ObjectTypes, true, Hit);
+
+		if (Hit.bBlockingHit)
 		{
-			UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, DestLocation);
+			//if ((Distance > 500.0f))
+			//{
+			//	UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, DestLocation);
+			//}
+		}
+		else if ((Distance > 120.0f)) // We need to issue move command only if far enough in order for walk animation to play correctly
+		{
+			auto currentLocation = MyPawn->GetActorLocation();
+			FVector direction = DestLocation - currentLocation;
+			direction.Normalize();
+			UAIBlueprintHelperLibrary::SimpleMoveToLocation(this, direction * 150);
 		}
 	}
 }

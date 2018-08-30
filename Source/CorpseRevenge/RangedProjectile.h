@@ -37,7 +37,7 @@ private:
 	//UProjectileMovementComponent * m_ProjectileMovementComponent = nullptr;
 
 	FVector m_SpawnLocation;
-	AActor* m_Target;
+	AActor* m_Target = nullptr;
 
 	
 	

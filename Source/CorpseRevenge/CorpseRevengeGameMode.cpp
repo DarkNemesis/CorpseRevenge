@@ -5,6 +5,8 @@
 #include "CorpseRevengeCharacter.h"
 #include "UObject/ConstructorHelpers.h"
 
+#include "Runtime/Engine/Classes/Engine/World.h"
+
 ACorpseRevengeGameMode::ACorpseRevengeGameMode()
 {
 	// use our custom PlayerController class
